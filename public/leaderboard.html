@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2D Car Racing Game — Leaderboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="hazard-rule"></div>
+    <h1>Leader<span class="accent">board</span></h1>
+    <p>Top 10 drivers</p>
+    <div class="hazard-rule"></div>
+  </header>
+
+  <main class="panel panel--wide">
+    <table class="board">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Driver</th>
+          <th style="text-align:right">Score</th>
+          <th style="text-align:right">Coins</th>
+          <th style="text-align:right">Races</th>
+        </tr>
+      </thead>
+      <tbody id="boardBody">
+        <tr><td colspan="5" class="empty-state">Loading…</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top:30px">Your last runs</h2>
+    <table class="board" style="margin-top:10px">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th style="text-align:right">Score</th>
+          <th style="text-align:right">Coins</th>
+          <th style="text-align:right">Metres</th>
+          <th style="text-align:right">Top km/h</th>
+        </tr>
+      </thead>
+      <tbody id="historyBody">
+        <tr><td colspan="5" class="empty-state">Loading…</td></tr>
+      </tbody>
+    </table>
+
+    <div class="row" style="margin-top:24px">
+      <a class="btn btn--primary btn--sm" href="game.html">Back to the track</a>
+      <a class="btn btn--ghost btn--sm" href="index.html">Sign in page</a>
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/leaderboard.js"></script>
+</body>
+</html>

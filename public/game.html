@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2D Car Racing Game — Play</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="hazard-rule"></div>
+    <h1>2D <span class="accent">Car Racing</span> Game</h1>
+    <div class="hazard-rule"></div>
+  </header>
+
+  <main class="arena">
+
+    <!-- ------------------------------ side rail ------------------------------ -->
+    <aside class="rail">
+      <p class="who"><span>Driver</span><em id="driverName">—</em></p>
+      <p class="best">Best run: <span id="bestScore">0</span></p>
+
+      <button class="btn btn--primary" id="startBtn" type="button">Start game</button>
+      <a class="btn btn--ghost" href="leaderboard.html">Leaderboard</a>
+      <button class="btn btn--ghost" id="logoutBtn" type="button">Log out</button>
+
+      <h3>Controls</h3>
+      <div class="keycaps">
+        <div class="key up">↑</div>
+        <div class="key">←</div>
+        <div class="key">↓</div>
+        <div class="key">→</div>
+      </div>
+      <ul class="rules">
+        <li>Arrow keys steer and change speed</li>
+        <li>Dodge the traffic</li>
+        <li>Grab coins for bonus points</li>
+        <li>Press P to pause</li>
+      </ul>
+    </aside>
+
+    <!-- -------------------------------- stage -------------------------------- -->
+    <div>
+      <div class="stage">
+        <canvas id="gameCanvas" width="480" height="640"></canvas>
+
+        <div class="hud">
+          <div class="stat"><b id="hudScore">0</b><small>Score</small></div>
+          <div class="stat"><b id="hudSpeed">0</b><small>km/h</small></div>
+          <div class="stat coins"><b id="hudCoins">0</b><small>Coins</small></div>
+        </div>
+
+        <!-- menu -->
+        <div class="overlay is-open" id="menuScreen">
+          <h2>Ready to drive</h2>
+          <p class="tagline">Four lanes, no brakes worth trusting. See how far you get.</p>
+          <button class="btn btn--primary" id="menuStartBtn" type="button">Start game</button>
+        </div>
+
+        <!-- paused -->
+        <div class="overlay" id="pauseScreen">
+          <h2>Paused</h2>
+          <p class="tagline">The traffic is waiting.</p>
+          <button class="btn btn--primary" id="resumeBtn" type="button">Resume</button>
+          <button class="btn btn--ghost" id="quitBtn" type="button">Exit to menu</button>
+        </div>
+
+        <!-- game over -->
+        <div class="overlay" id="gameOver">
+          <h2>Crashed</h2>
+          <div class="final-stats">
+            <div><b id="finalScore">0</b><small>Score</small></div>
+            <div><b id="finalCoins">0</b><small>Coins</small></div>
+            <div><b id="finalDistance">0</b><small>Metres</small></div>
+          </div>
+          <p class="save-note" id="saveNote"></p>
+          <button class="btn btn--primary" id="restartBtn" type="button">Race again</button>
+          <button class="btn btn--ghost" id="homeBtn" type="button">Back to menu</button>
+        </div>
+      </div>
+
+      <div class="touchpad">
+        <button type="button" data-key="ArrowLeft" aria-label="Steer left">←</button>
+        <button type="button" data-key="ArrowUp" aria-label="Speed up">↑</button>
+        <button type="button" data-key="ArrowDown" aria-label="Slow down">↓</button>
+        <button type="button" data-key="ArrowRight" aria-label="Steer right">→</button>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+/* ============================================================
+   2D Car Racing Game - shared styles
+   Palette is taken from real road furniture: asphalt, lane paint,
+   hazard yellow, brake-light red.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&family=Barlow+Condensed:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --asphalt: #101319;
+  --panel: #191d26;
+  --panel-2: #222834;
+  --line: #2e3543;
+  --hazard: #ffc61a;
+  --signal: #e33b4e;
+  --mint: #35d39a;
+  --lane: #e8ecf3;
+  --muted: #8a93a5;
+
+  --display: 'Racing Sans One', 'Impact', sans-serif;
+  --ui: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --mono: 'JetBrains Mono', 'Consolas', monospace;
+
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  background: var(--asphalt);
+  background-image:
+    radial-gradient(ellipse at top, #1b2130 0%, var(--asphalt) 60%);
+  color: var(--lane);
+  font-family: var(--ui);
+  font-size: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px 48px;
+}
+
+/* --- the signature device: a hazard stripe used as a rule ---------------- */
+.hazard-rule {
+  height: 8px;
+  width: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--hazard) 0 14px,
+    #14171e 14px 28px
+  );
+  border-radius: 2px;
+}
+
+/* --- header -------------------------------------------------------------- */
+.masthead {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.masthead h1 {
+  font-family: var(--display);
+  font-size: clamp(30px, 7vw, 52px);
+  letter-spacing: 1px;
+  line-height: 1;
+  margin: 14px 0 4px;
+}
+
+.masthead h1 .accent { color: var(--hazard); }
+
+.masthead p {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+/* --- cards / panels ------------------------------------------------------ */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.panel--wide { max-width: 760px; }
+
+.panel h2 {
+  font-family: var(--display);
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.panel .hint {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+/* --- tabs ---------------------------------------------------------------- */
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  font-family: var(--ui);
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.tab.is-active {
+  background: var(--hazard);
+  border-color: var(--hazard);
+  color: #14171e;
+}
+
+/* --- forms --------------------------------------------------------------- */
+.field { margin-bottom: 14px; }
+
+.field label {
+  display: block;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.field input {
+  width: 100%;
+  padding: 11px 12px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--lane);
+  font-family: var(--ui);
+  font-size: 17px;
+}
+
+.field input:focus {
+  outline: 2px solid var(--hazard);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+/* --- buttons ------------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--ui);
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .08s ease, filter .15s ease;
+}
+
+.btn:active { transform: translateY(1px); }
+.btn:hover  { filter: brightness(1.08); }
+
+.btn--primary { background: var(--hazard); color: #14171e; }
+.btn--danger  { background: var(--signal); color: #fff; }
+.btn--ghost   { background: transparent; border: 1px solid var(--line); color: var(--lane); }
+.btn--sm      { width: auto; padding: 8px 16px; font-size: 15px; }
+
+.btn:focus-visible { outline: 3px solid var(--mint); outline-offset: 2px; }
+
+/* --- messages ------------------------------------------------------------ */
+.msg {
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 15px;
+  margin-bottom: 14px;
+  display: none;
+}
+
+.msg.is-visible { display: block; }
+.msg--error   { background: rgba(227, 59, 78, .14); color: #ff9aa6; border-left: 3px solid var(--signal); }
+.msg--success { background: rgba(53, 211, 154, .14); color: #7ff0c4; border-left: 3px solid var(--mint); }
+
+/* --- generic layout helpers --------------------------------------------- */
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.center-links {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.center-links a { color: var(--hazard); text-decoration: none; }
+.center-links a:hover { text-decoration: underline; }
+
+.mono { font-family: var(--mono); }
+
+/* --- leaderboard table --------------------------------------------------- */
+table.board {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+}
+
+table.board th {
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+table.board td {
+  padding: 11px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+table.board tr:last-child td { border-bottom: none; }
+table.board td.num { font-family: var(--mono); text-align: right; }
+
+.rank {
+  font-family: var(--display);
+  font-size: 20px;
+  color: var(--muted);
+  width: 44px;
+}
+
+tr.rank-1 .rank { color: var(--hazard); }
+tr.rank-2 .rank { color: #c8d0de; }
+tr.rank-3 .rank { color: #cc8b4e; }
+
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+  padding: 30px 10px;
+}
+
+@media (max-width: 480px) {
+  body { padding: 16px 12px 36px; }
+  .panel { padding: 18px; }
+}

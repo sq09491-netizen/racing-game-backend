@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2D Car Racing Game — Sign in</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="hazard-rule"></div>
+    <h1>2D <span class="accent">Car Racing</span> Game</h1>
+    <p>Full stack project</p>
+    <div class="hazard-rule"></div>
+  </header>
+
+  <main class="panel">
+    <div class="tabs">
+      <button class="tab is-active" id="tabLogin" type="button">Sign in</button>
+      <button class="tab" id="tabRegister" type="button">Register</button>
+    </div>
+
+    <div class="msg msg--error" id="errorBox"></div>
+    <div class="msg msg--success" id="successBox"></div>
+
+    <!-- ---------------------------- Login form ---------------------------- -->
+    <section id="loginForm">
+      <h2>Get back on the track</h2>
+      <p class="hint">Your high score is waiting.</p>
+
+      <div class="field">
+        <label for="loginId">Username or email</label>
+        <input type="text" id="loginId" autocomplete="username" />
+      </div>
+
+      <div class="field">
+        <label for="loginPass">Password</label>
+        <input type="password" id="loginPass" autocomplete="current-password" />
+      </div>
+
+      <button class="btn btn--primary" id="loginBtn" type="button">Sign in</button>
+    </section>
+
+    <!-- --------------------------- Register form -------------------------- -->
+    <section id="registerForm" hidden>
+      <h2>Create a driver profile</h2>
+      <p class="hint">Takes ten seconds.</p>
+
+      <div class="field">
+        <label for="regUser">Username</label>
+        <input type="text" id="regUser" autocomplete="username" />
+      </div>
+
+      <div class="field">
+        <label for="regEmail">Email</label>
+        <input type="email" id="regEmail" autocomplete="email" />
+      </div>
+
+      <div class="field">
+        <label for="regPass">Password</label>
+        <input type="password" id="regPass" autocomplete="new-password" />
+      </div>
+
+      <button class="btn btn--primary" id="registerBtn" type="button">Create profile</button>
+    </section>
+
+    <p class="center-links"><a href="leaderboard.html">View the leaderboard</a></p>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>
