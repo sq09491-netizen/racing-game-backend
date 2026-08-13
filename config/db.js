@@ -1,27 +1,20 @@
-/**
- * MySQL connection pool.
- * A pool reuses connections instead of opening a new one per query,
- * which is what you want for a web server.
- */
 const mysql = require('mysql2/promise');
 
-const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  port: Number(process.env.DB_PORT) || 3306,
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'car_racing_game',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-ssl: { rejectUnauthorized: false }
-});
+// Aiven Service Connection URI
+const connectionString = process.env.DATABASE_URL || 
+  'mysql://avnadmin:AVNS_RtNVnQSJRszxYM4PPAO@mysql-266c6faf-sq09491-ae12.b.aivencloud.com:26300/defaultdb?ssl-mode=REQUIRED';
 
-// Fail fast at startup if the DB is unreachable.
+const pool = mysql.createPool(connectionString);
+
 async function testConnection() {
-  const conn = await pool.getConnection();
-  await conn.ping();
-  conn.release();
+  try {
+    const conn = await pool.getConnection();
+    console.log('✅ Connected to Aiven MySQL successfully!');
+    await conn.ping();
+    conn.release();
+  } catch (err) {
+    console.error('❌ DB Connection Error:', err.message);
+  }
 }
 
 module.exports = { pool, testConnection };
