@@ -8,7 +8,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-const { testConnection } = require('./config/db');
+const { testConnection, pool } = require('./config/db');
 const authRoutes = require('./routes/auth');
 const gameRoutes = require('./routes/game');
 
@@ -35,16 +35,39 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 
 (async () => {
-  try {
-    await testConnection();
-    console.log('[db] connected to MySQL');
-  } catch (err) {
-    console.error('[db] connection failed:', err.message);
-    console.error('     Check your .env values and make sure MySQL is running.');
-    process.exit(1);
-  }
+    try {
+        await testConnection();
+        console.log('[db] connected to MySQL');
 
-  app.listen(PORT, () => {
-    console.log(`[server] running at http://localhost:${PORT}`);
-  });
+        // Auto create tables if they don't exist
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS users (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(100) NOT NULL UNIQUE,
+                email VARCHAR(150) NOT NULL UNIQUE,
+                password VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `);
+
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS scores (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(100) NOT NULL,
+                score INT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        `);
+
+        console.log('[db] Tables created/verified successfully!');
+
+    } catch (err) {
+        console.error('[db] connection failed:', err.message);
+        console.error('Check your .env values and make sure MySQL is running.');
+        process.exit(1);
+    }
+
+    app.listen(PORT, () => {
+        console.log(`[server] running at http://localhost:${PORT}`);
+    });
 })();
