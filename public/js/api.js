@@ -3,7 +3,7 @@
  * The JWT is kept in localStorage and attached automatically.
  */
 const API = (() => {
-  const BASE_URL = 'http://10.149.192.169:3000';
+  const BASE_URL = 'https://racing-game-backend-18q8.onrender.com';
   const TOKEN_KEY = 'crg_token';
   const USER_KEY = 'crg_user';
 
